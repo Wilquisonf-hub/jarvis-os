@@ -57,11 +57,11 @@
 - **Status:** PENDING
 - **Assigned to:** Gabi
 - **Deadline:** 2026-05-22
-- **Follow-up:** 2026-05-21
-- **Reminder:** daily until resolved
+- **Follow-up:** 2026-05-20
+- **Reminder:** none
 - **Dependencies:** none
 - **Description:** Ton platform — funds frozen in account. Urgent resolution needed.
-- **Notes:** Financial impact — delegated to Gabi.
+- **Notes:** **URGENT: Passar para Gabi resolver AMANHÃ (20/05).** Follow-up agendado para 21/05.
 
 ### 3. Resolver com a Thieme Cobrança Extra dos Fretes
 - **Category:** BUSINESS
@@ -188,16 +188,7 @@
 - **Description:** Resolve order for Adventista Norte.
 - **Notes:** Client order.
 
-### 11. Venda Primo Rico; Compras - Prazos - Recebimento
-- **Category:** BUSINESS
-- **Status:** PENDING
-- **Assigned to:** Will
-- **Deadline:** 2026-05-24
-- **Follow-up:** 2026-05-25
-- **Reminder:** none
-- **Dependencies:** none
-- **Description:** Prime Rico sale — track purchases, terms, and payments.
-- **Notes:** Client sale.
+
 
 ### 12. Venda Cage C50 para Canon
 - **Category:** BUSINESS
@@ -495,7 +486,7 @@
 - **Notes:** Dimensions: 2.5m x 1.5m. External supplier: Recience (Jerry). Internal: Jeniffer (Comercial). Follow-up: check proposal receipt tomorrow AM. **Proposal deadline: tomorrow (20/05).**
 - **Update 21:49:** Message sent to Jerry. Awaiting updated proposal AM 20/05.
 
-### 45. Pedido de Compra Kaique (Equipamentos)
+### 45. Venda Primo Rico; Pedido de Compra Kaique (Equipamentos)
 - **Category:** BUSINESS
 - **Status:** PENDING
 - **Assigned to:** Will
@@ -503,8 +494,8 @@
 - **Follow-up:** none
 - **Reminder:** none
 - **Dependencies:** none
-- **Description:** Call Kaique tomorrow to process equipment purchase order. Funding source: R$150,000 receivable.
-- **Notes:** Action: call Kaique AM 20/05. Follow-up: confirm order placement.
+- **Description:** Combo task: (1) Call Kaique to process equipment purchase order — funding source: R$150,000 receivable; (2) Prime Rico sale — track purchases, terms, and payments.
+- **Notes:** Action: call Kaique AM 20/05. Follow-up: confirm order placement. Prime Rico sale tracking deadline 24/05.
 
 ### 46. Compra Sony FX3; Negociar prazo com Merlin
 - **Category:** BUSINESS
