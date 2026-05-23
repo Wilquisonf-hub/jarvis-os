@@ -1,0 +1,83 @@
+# === JARVIS OS - Files to track ===
+jarvis-os/
+
+# === DO NOT TRACK ===
+
+# Secrets & credentials
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+id_rsa
+id_ed25519
+authorized_keys
+known_hosts
+ssh_config
+.gitconfig
+
+# Tokens & API keys
+token
+secrets
+credentials
+*.credentials
+
+# Database files (unless explicitly tracked)
+*.sqlite3
+*.sqlite
+*.db-wal
+*.db-shm
+*.journal
+*.sqlite-wal
+*.sqlite-shm
+
+# Node_modules & build artifacts
+node_modules/
+dist/
+build/
+*.o
+*.so
+*.dylib
+*.pyc
+*.pyo
+__pycache__/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.log
+*.pid
+*.tmp
+*.swp
+*.swo
+*~
+
+# Runtime & state (ephemeral)
+operations/state/queues.json
+operations/state/worker-status.json
+operations/state/lock-file
+operations/logs/change.log
+
+# Backups (tracked separately)
+operations/backups/*
+!operations/backups/README.md
+!operations/backups/MANIFEST.md
+
+# WAL files from any source
+*.wal
+
+# Temp files
+*.temp
+*.bak
+*.backup
+*.orig
+
+# Git repo itself
+.jarvis-os/.git
+
+# Cache
+.cache/
+.cache/

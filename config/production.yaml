@@ -1,0 +1,57 @@
+# Config — Environment Configuration
+
+## What Goes Here
+
+Environment-specific settings for JARVIS OS.
+
+## Environment: Production (Current)
+
+```yaml
+agent:
+  name: Jarvis
+  model: ollama/qwen3.6
+  workspace: /Users/wilquison/jarvis
+
+filesystem:
+  jarvis_os_root: jarvis-os/
+  identity_files: [SOUL.md, AGENTS.md, IDENTITY.md, USER.md]
+  operational_files: [TASKS.md, PROJECTS.md, SCHEDULE.md, TEAM.md]
+
+cron:
+  timezone: America/Sao_Paulo
+  morning_briefing: 6:30
+  heartbeat: hourly
+  inbox_triage: every 30min
+  eod_review: 21:00
+  weekly_review: mon 9:00
+
+safety:
+  max_concurrent_ops: 3
+  cron_timeout: 180
+  safe_mode_triggers: [3_cron_failures, file_corruption, instability]
+  backup_required_before_deploy: true
+
+identity_protection:
+  immutable_files: [SOUL.md, AGENTS.md, IDENTITY.md, USER.md]
+  backup_before_modify: true
+  recovery_priority: [recovery.md, backups, repository]
+```
+
+## Environment: Staging (Future)
+
+```yaml
+# Staging environment — not yet configured
+# Use this to test changes before production deployment
+```
+
+## Migration Guide
+
+To change environment:
+1. Update config/production.yaml or create config/staging.yaml
+2. Update bootstrap/BOOTSTRAP.md to reference new config
+3. Validate with `/jarvis-os validate`
+4. Deploy with `/jarvis-os deploy config/`
+
+---
+
+*Config — environment settings, not code*
