@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Close — May 17-23, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0d0d0d;
+    color: #e8e8e8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 80px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  
+  .header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+  
+  .header .subtitle {
+    font-size: 18px;
+    font-weight: 300;
+    color: #888;
+    letter-spacing: 2px;
+  }
+  
+  .header .divider {
+    width: 60px;
+    height: 2px;
+    background: #2a8c7b;
+    margin: 20px auto;
+  }
+  
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 48px;
+    padding: 20px 40px;
+    background: #151515;
+    border-radius: 8px;
+  }
+  
+  .stat {
+    text-align: center;
+  }
+  
+  .stat .number {
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  
+  .stat .label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+  }
+  
+  .stat.completed .number { color: #2a8c7b; }
+  .stat.pending .number { color: #e8a838; }
+  .stat.progress .number { color: #4a90d9; }
+  .stat.waiting .number { color: #a0a0a0; }
+  .stat.delayed .number { color: #d94a4a; }
+  
+  .completed-section {
+    margin-bottom: 48px;
+  }
+  
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #555;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  
+  .tasks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .task-card {
+    background: #151515;
+    border-radius: 6px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.2s;
+  }
+  
+  .task-card:hover {
+    background: #1a1a1a;
+  }
+  
+  .badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  
+  .badge.teal { background: #2a8c7b; color: #fff; }
+  .badge.blue { background: #4a90d9; color: #fff; }
+  .badge.amber { background: #e8a838; color: #fff; }
+  .badge.gray { background: #555; color: #fff; }
+  
+  .task-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .task-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #e0e0e0;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .task-date {
+    font-size: 11px;
+    color: #555;
+    margin-top: 2px;
+  }
+  
+  .footer {
+    text-align: center;
+    margin-top: auto;
+    padding-top: 32px;
+    border-top: 1px solid #1a1a1a;
+  }
+  
+  .footer-text {
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 1px;
+  }
+  
+  .footer-text span {
+    color: #666;
+    font-weight: 600;
+  }
+  
+  .timestamp {
+    font-size: 10px;
+    color: #333;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Weekly Close</h1>
+    <div class="divider"></div>
+    <div class="subtitle">May 17 — 23, 2026</div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat completed">
+      <div class="number">12</div>
+      <div class="label">Completed</div>
+    </div>
+    <div class="stat pending">
+      <div class="number">28</div>
+      <div class="label">Pending</div>
+    </div>
+    <div class="stat progress">
+      <div class="number">6</div>
+      <div class="label">In Progress</div>
+    </div>
+    <div class="stat waiting">
+      <div class="number">4</div>
+      <div class="label">Waiting</div>
+    </div>
+    <div class="stat delayed">
+      <div class="number">1</div>
+      <div class="label">Delayed</div>
+    </div>
+  </div>
+
+  <div class="completed-section">
+    <div class="section-title">Completed Tasks</div>
+    <div class="tasks-grid">
+      
+      <div class="task-card">
+        <div class="badge teal">#55</div>
+        <div class="task-info">
+          <div class="task-title">Netgear para Cabo Verde</div>
+          <div class="task-date">May 22</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="badge blue">#16</div>
+        <div class="task-info">
+          <div class="task-title">Workflow CRM no Central — Ygor</div>
+          <div class="task-date">May 22</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="badge amber">#54</div>
+        <div class="task-info">
+          <div class="task-title">Orçamento Sennheiser EM 6000 x3 — Globo</div>
+          <div class="task-date">May 22</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="badge gray">#3</div>
+        <div class="task-info">
+          <div class="task-title">Cobrança Extra Fretes — Thieme</div>
+          <div class="task-date">May 21</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="badge teal">#8</div>
+        <div class="task-info">
+          <div class="task-title">Data de retorno Vivi — i9Store USA</div>
+          <div class="task-date">May 21</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="badge blue">#13</div>
+        <div class="task-info">
+          <div class="task-title">Proposta LED Parkstation Atualizada</div>
+          <div class="task-date">May 21</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="badge amber">#30</div>
+        <div class="task-info">
+          <div class="task-title">Ordem de Compra Campsnap</div>
+          <div class="task-date">May 21</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="badge gray">#31</div>
+        <div class="task-info">
+          <div class="task-title">Pedido de Venda Rede Palavra</div>
+          <div class="task-date">May 21</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="badge teal">#34</div>
+        <div class="task-info">
+          <div class="task-title">Organizar Estoque para envio Pipo</div>
+          <div class="task-date">May 21</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="badge blue">#35</div>
+        <div class="task-info">
+          <div class="task-title">Prioridades NiSi Catalogo</div>
+          <div class="task-date">May 21</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="badge amber">#42</div>
+        <div class="task-info">
+          <div class="task-title">Church Tech Expo — Planning</div>
+          <div class="task-date">May 21</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="badge gray">#50</div>
+        <div class="task-info">
+          <div class="task-title">Desmontagem Semana ABC 2026</div>
+          <div class="task-date">May 21</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">
+      <span>12</span> tasks closed · <span>57</span> total in system · Week 21
+    </div>
+    <div class="timestamp">Generated May 23, 2026</div>
+  </div>
+
+</body>
+</html>
