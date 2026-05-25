@@ -1,0 +1,50 @@
+# Identity files are symlinked from identity/ — don't track duplicates
+!SOUL.md
+!AGENTS.md
+!USER.md
+!MEMORY.md
+!IDENTITY.md
+!RULES.md
+!OPERATIONS.md
+!TEAM.md
+!PROJECTS.md
+!SCHEDULE.md
+
+# Operational data
+memory/ops/tasks.db
+memory/ops/heartbeats/
+operations/backups/
+operations/snapshots/
+operations/state/
+
+# Env files (contains secrets)
+.env
+.env.local
+.env.production
+config/production.yaml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archive snapshots
+archives/
+
+# Logs
+*.log
+logs/
+
+# Ollama model cache (large, don't track)
+*.gguf
+
+# Script outputs
+output/
+tmp/
+temp/

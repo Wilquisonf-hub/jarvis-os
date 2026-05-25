@@ -1,0 +1,64 @@
+# verify-identity.cron — Periodic Identity Verification Schedule
+
+## PURPOSE
+Lightweight periodic validation of identity boundaries and startup integrity.
+
+## SCHEDULE
+Run every 4 hours during business hours (06:00–22:00 BRT)
+
+## CRON EXPRESSION
+```
+0 6-22/4 * * 1-5 /opt/homebrew/bin/gog exec workspace /Users/wilquison/jarvis/scripts/verify-identity.sh 2>&1 | tee -a /Users/wilquison/jarvis/operations/audit/identity-verification.log
+```
+
+## BEHAVIOR
+
+### On Each Run:
+1. Execute `/scripts/verify-identity.sh`
+2. Log output to `/operations/audit/identity-verification.log`
+3. Append timestamp to log
+
+### On Violation Detection:
+1. Log the specific violation with timestamp
+2. Create alert in `/operations/audit/alerts/`
+3. **NEVER** auto-modify any file
+4. **NEVER** attempt automatic repair
+5. **NEVER** send notifications without human configuration
+
+### On Clean Result:
+1. Log "PASS" with timestamp
+2. Append to audit log only
+
+### File Write Restrictions:
+- ✅ `/operations/audit/identity-verification.log` — append only
+- ✅ `/operations/audit/alerts/` — create alert files on violation
+- ❌ No workspace files modified
+- ❌ No topology files modified
+- ❌ No governance files modified
+- ❌ No identity files modified
+- ❌ No heartbeat files modified
+
+## ALERT FILE FORMAT
+
+```
+Timestamp: YYYY-MM-DD HH:MM:SS
+Trigger: verify-identity.sh
+Violations: N
+Details: [specific violations]
+Action: Manual review required
+Status: PENDING
+```
+
+## MONITORING
+
+Review `/operations/audit/identity-verification.log` for:
+- PASS/FAIL trends
+- Violation patterns
+- Timing of activations
+
+## SAFEGUARDS
+
+- This cron job NEVER modifies any workspace file
+- This cron job NEVER triggers auto-remediation
+- This cron job NEVER sends notifications without explicit configuration
+- This cron job runs read-only validation only
