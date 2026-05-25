@@ -1,0 +1,82 @@
+types:
+  Person:
+    required: [name]
+    properties:
+      role: string
+      company: string
+      email: string
+      phone: string
+      reliability: enum[reliable, inconsistent, unknown]
+      position: string
+  Company:
+    required: [name]
+    properties:
+      industry: string
+  Project:
+    required: [name, status]
+    status_enum: [active, paused, completed, archived]
+  Task:
+    required: [title, status]
+    status_enum: [open, in_progress, blocked, done, deferred]
+    properties:
+      priority: enum[critical, high, medium, low]
+      due: date
+      assignee: ref[Person]
+      owner: ref[Person]
+      project: ref[Project]
+      source: enum[manual, gmail, calendar, telegram]
+      blockers: ref[Task][]
+  Event:
+    required: [title, start]
+    properties:
+      end: date
+      location: string
+      organizer: ref[Person]
+      attendees: ref[Person][]
+      type: enum[meeting, call, deadline, social, other]
+  Position:
+    required: [title, company]
+    properties:
+      description: string
+
+relations:
+  has_owner:
+    from_types: [Project, Task]
+    to_types: [Person]
+    cardinality: many_to_one
+  has_assignee:
+    from_types: [Task]
+    to_types: [Person]
+    cardinality: many_to_one
+  has_member:
+    from_types: [Company]
+    to_types: [Person]
+    cardinality: one_to_many
+  has_position:
+    from_types: [Person]
+    to_types: [Position]
+    cardinality: many_to_one
+  belongs_to:
+    from_types: [Person]
+    to_types: [Company]
+    cardinality: many_to_one
+  has_task:
+    from_types: [Project]
+    to_types: [Task]
+    cardinality: one_to_many
+  blocks:
+    from_types: [Task]
+    to_types: [Task]
+    acyclic: true
+  has_attendee:
+    from_types: [Event]
+    to_types: [Person]
+    cardinality: many_to_many
+  is_organizer:
+    from_types: [Event]
+    to_types: [Person]
+    cardinality: many_to_one
+  has_event:
+    from_types: [Project]
+    to_types: [Event]
+    cardinality: one_to_many

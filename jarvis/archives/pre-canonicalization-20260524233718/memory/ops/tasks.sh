@@ -1,0 +1,95 @@
+#!/bin/bash
+# tasks.sh - CLI for task management
+# Usage: bash tasks.sh <command> [args]
+#
+# Commands:
+#   list [status]          List tasks, optionally filter by status
+#   overdue                Show overdue tasks
+#   today                  Show today's deadlines
+#   followups              Show today's follow-ups
+#   by <person>            Tasks assigned to person
+#   status <id> <status>   Update task status
+#   deadline <id> <date>   Update task deadline
+#   followup <id> <date>   Update follow-up date
+#   add <title> <deadline> [status] [assigned]  Create new task
+#   notes <id> <text>      Append notes to task
+#   breakdown <id> <text>  Set breakdown field
+#   details <id>           Show full task details including breakdown/notes
+#   close <id>            Mark task as COMPLETED
+
+DB="~/jarvis/memory/ops/tasks.db"
+resolve_db() { echo "$DB" | sed "s|~|$HOME|"; }
+
+run() { sqlite3 -header -column "$(resolve_db)" "$1"; }
+
+case "${1:-}" in
+  list)
+    STATUS="${2:-}"
+    if [ -n "$STATUS" ]; then
+      run "SELECT id, title, status, deadline, assigned_to FROM tasks WHERE status='$STATUS' ORDER BY deadline;"
+    else
+      run "SELECT id, title, status, deadline, assigned_to FROM tasks ORDER BY deadline;"
+    fi
+    ;;
+  overdue)
+    TODAY=$(date +%Y-%m-%d)
+    run "SELECT id, title, status, deadline, assigned_to FROM tasks WHERE deadline < '$TODAY' AND status != 'COMPLETED' ORDER BY deadline;"
+    ;;
+  today)
+    TODAY=$(date +%Y-%m-%d)
+    run "SELECT id, title, status, deadline, assigned_to FROM tasks WHERE deadline='$TODAY' AND status != 'COMPLETED' ORDER BY assigned_to;"
+    ;;
+  followups)
+    TODAY=$(date +%Y-%m-%d)
+    run "SELECT id, title, status, deadline, follow_up, assigned_to FROM tasks WHERE follow_up='$TODAY' AND status != 'COMPLETED' ORDER BY assigned_to;"
+    ;;
+  by)
+    PERSON="$2"
+    run "SELECT id, title, status, deadline FROM tasks WHERE assigned_to LIKE '%$PERSON%' AND status != 'COMPLETED' ORDER BY deadline;"
+    ;;
+  status)
+    ID="$2"; NEW_STATUS="$3"
+    run "UPDATE tasks SET status='$NEW_STATUS', updated_at=datetime('now') WHERE id=$ID;"
+    echo "Task $ID -> $NEW_STATUS"
+    run "SELECT id, title, status, deadline, assigned_to FROM tasks WHERE id=$ID;"
+    ;;
+  deadline)
+    ID="$2"; NEW_DEADLINE="$3"
+    run "UPDATE tasks SET deadline='$NEW_DEADLINE', updated_at=datetime('now') WHERE id=$ID;"
+    echo "Task $ID deadline -> $NEW_DEADLINE"
+    ;;
+  followup)
+    ID="$2"; DATE="$3"
+    run "UPDATE tasks SET follow_up='$DATE', updated_at=datetime('now') WHERE id=$ID;"
+    echo "Follow-up set for task $ID -> $DATE"
+    ;;
+  add)
+    TITLE="$2"; DEADLINE="$3"; STATUS="${4:-PENDING}"; ASSIGNED="${5:-Will}"
+    NEXT=$(run "SELECT COALESCE(MAX(id),0)+1 FROM tasks;" | awk '{print $1}')
+    run "INSERT INTO tasks (id, title, status, assigned_to, deadline, category, notes, source) VALUES ($NEXT, '$TITLE', '$STATUS', '$ASSIGNED', '$DEADLINE', 'BUSINESS', 'Added via CLI', 'manual');"
+    echo "Created task #$NEXT: $TITLE"
+    ;;
+  notes)
+    ID="$2"; TEXT="$3"
+    run "UPDATE tasks SET notes=notes || '\n[CLI added '"$(date +%Y-%m-%d)"'] '$TEXT''', updated_at=datetime('now') WHERE id=$ID;"
+    echo "Notes added to task $ID"
+    ;;
+  breakdown)
+    ID="$2"; TEXT="$3"
+    run "UPDATE tasks SET notes=notes || '\n[Breakdown '"$(date +%Y-%m-%d)"'] '$TEXT''', updated_at=datetime('now') WHERE id=$ID;"
+    echo "Breakdown added to task $ID"
+    ;;
+  details)
+    ID="$2"
+    run "SELECT id, title, status, deadline, follow_up, assigned_to, priority, notes FROM tasks WHERE id=$ID;"
+    ;;
+  close)
+    ID="$2"
+    run "UPDATE tasks SET status='COMPLETED', updated_at=datetime('now') WHERE id=$ID;"
+    echo "Task $ID marked as COMPLETED"
+    ;;
+  *)
+    echo "Usage: bash tasks.sh <command> [args]"
+    echo "Commands: list [status], overdue, today, followups, by <person>, status <id> <status>, deadline <id> <date>, followup <id> <date>, add <title> <deadline> [status] [assigned], notes <id> <text>, breakdown <id> <text>, details <id>, close <id>"
+    ;;
+esac

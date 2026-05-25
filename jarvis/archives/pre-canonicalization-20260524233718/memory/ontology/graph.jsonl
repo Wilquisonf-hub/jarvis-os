@@ -1,0 +1,32 @@
+{"op":"create","entity":{"id":"p_will","type":"Person","properties":{"name":"Will Will","email":"wilquisonf@i9tv.com.br","company":"i9 Group","role":"COO/Founder","notes":"Handles everything at i9 Group: marketing, sales, management. i9tv founder's son, created i9Store in 2018."}}}
+{"op":"create","entity":{"id":"p_wilquisom","type":"Person","properties":{"name":"Wilquisom Pereira","email":"wilquisom@i9tv.com.br","company":"i9 Group","role":"CEO/Founder","notes":"Founded i9tv in 2004. Full owner of i9 Group."}}}
+{"op":"create","entity":{"id":"p_erika","type":"Person","properties":{"name":"Erika Vieira","email":"erika@i9tv.com.br","company":"i9 Group","role":"CFO","notes":""}}}
+{"op":"create","entity":{"id":"p_gabi","type":"Person","properties":{"name":"Gabrielle Bampi","email":"gabrielle.machado@i9store.com","company":"i9Store","role":"Administrative & Finance Assistant","notes":""}}}
+{"op":"create","entity":{"id":"p_marcos","type":"Person","properties":{"name":"Marcos Roberto","email":"marcos@i9store.com","company":"i9Store","role":"Sales Rep","notes":""}}}
+{"op":"create","entity":{"id":"p_je","type":"Person","properties":{"name":"Jeniffer Santos","email":"jeniffer.santos@i9store.com","company":"i9Store","role":"Sales Manager","notes":""}}}
+{"op":"create","entity":{"id":"p_cido","type":"Person","properties":{"name":"Francisco Aparecido","email":"francisco@i9tv.com.br","company":"i9tv","role":"TBD","notes":"Needs role clarification"}}}
+{"op":"create","entity":{"id":"p_jhennifer_oliveira","type":"Person","properties":{"name":"Jhennifer Oliveira","email":"expedicao.es@i9tv.com.br","company":"i9tv","role":"Warehouse Operator","notes":""}}}
+{"op":"create","entity":{"id":"c_i9_group","type":"Company","properties":{"name":"i9 Group","companies":["i9tv","i9Store"],"ceo":"p_wilquisom","coo":"p_will","domain":"i9tv.com.br, i9store.com","industry":"Audiovisual"}}}
+{"op":"create","entity":{"id":"c_i9tv","type":"Company","properties":{"name":"i9tv","parent":"c_i9_group","founded":"2004","founder":"p_wilquisom","focus":"services, rentals, productions","domain":"i9tv.com.br","main_client":"TV Globo"}}}
+{"op":"create","entity":{"id":"c_i9store","type":"Company","properties":{"name":"i9Store","parent":"c_i9_group","founded":"2018","founder":"p_will","focus":"ecommerce b2c + b2b","domain":"i9store.com","business":"sales of audiovisual equipment"}}}
+{"op":"create","entity":{"id":"c_globo","type":"Company","properties":{"name":"TV Globo","type":"Main Client of i9tv","notes":"Sends many quotes to i9tv"}}}
+{"op":"relate","from":"p_will","rel":"has_position","to":"pos_coo"}
+{"op":"create","entity":{"id":"pos_coo","type":"Position","properties":{"title":"COO/Founder","company":"c_i9_group"}}}
+{"op":"relate","from":"p_wilquisom","rel":"has_position","to":"pos_ceo"}
+{"op":"create","entity":{"id":"pos_ceo","type":"Position","properties":{"title":"CEO/Founder","company":"c_i9_group"}}}
+{"op":"relate","from":"p_wilquisom","rel":"has_member","to":"c_i9tv"}
+{"op":"relate","from":"p_wilquisom","rel":"has_member","to":"c_i9_group"}
+{"op":"relate","from":"p_will","rel":"has_member","to":"c_i9_group"}
+{"op":"relate","from":"p_will","rel":"has_member","to":"c_i9store"}
+{"op":"relate","from":"p_erika","rel":"has_member","to":"c_i9_group"}
+{"op":"relate","from":"p_gabi","rel":"has_member","to":"c_i9store"}
+{"op":"relate","from":"p_marcos","rel":"has_member","to":"c_i9store"}
+{"op":"relate","from":"p_je","rel":"has_member","to":"c_i9store"}
+{"op":"relate","from":"p_cido","rel":"has_member","to":"c_i9tv"}
+{"op":"relate","from":"p_jhennifer_oliveira","rel":"has_member","to":"c_i9tv"}
+{"op":"relate","from":"c_i9tv","rel":"has_client","to":"c_globo"}
+{"op":"relate","from":"c_i9tv","rel":"belongs_to","to":"c_i9_group"}
+{"op":"relate","from":"c_i9store","rel":"belongs_to","to":"c_i9_group"}
+{"op":"relate","from":"p_wilquisom","rel":"owns","to":"c_i9_group"}
+{"op":"relate","from":"p_will","rel":"founded","to":"c_i9store"}
+{"op":"relate","from":"p_wilquisom","rel":"founded","to":"c_i9tv"}

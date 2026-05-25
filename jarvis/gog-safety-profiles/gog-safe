@@ -1,0 +1,10 @@
+#!/bin/bash
+# Safety-wrapped gog binary for OpenClaw agent use
+# Always adds --gmail-no-send and blocks destructive operations
+
+GOG_BIN="/opt/homebrew/bin/gog"
+
+# Build safety flags
+SAFETY_FLAGS="--gmail-no-send --disable-commands gmail.send,gmail.trash,gmail.mark-read,gmail.unread,gmail.archive,gmail.drafts.create,gmail.drafts.delete,gmail.drafts.send,gmail.drafts.update,gmail.labels.create,gmail.labels.delete,gmail.labels.rename,gmail.labels.modify,gmail.labels.style,gmail.batch.delete,gmail.batch.modify,gmail.thread.modify,gmail.watch,gmail.autoforward,gmail.delegates,gmail.filters,gmail.forwarding,gmail.sendas,gmail.vacation,gmail.forward,drive.delete,drive.move,drive.rename,drive.share,drive.unshare,drive.copy,drive.upload,drive.mkdir,calendar.create,calendar.update,calendar.delete,calendar.move,calendar.respond,calendar.propose-time,calendar.subscribe,calendar.alias.set,calendar.alias.unset,calendar.out-of-office,calendar.focus-time,calendar.working-location,calendar.create-calendar,gmail.messages.modify"
+
+exec "$GOG_BIN" $SAFETY_FLAGS "$@"
